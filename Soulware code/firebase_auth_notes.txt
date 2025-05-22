@@ -1,0 +1,27 @@
+# Soulware: Firebase Auth — комментарии по подключению
+
+1. Создай проект на https://console.firebase.google.com
+2. Включи в Authentication:
+   - Email/Password
+   - Google
+   - Facebook
+   - Apple
+3. В настройках проекта добавь новое Web-приложение (App)
+   — Скопируй config с ключами
+4. Вставь config в login.html:
+
+<script>
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_APP.firebaseapp.com",
+    projectId: "YOUR_APP",
+    appId: "YOUR_APP_ID",
+    ...
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+5. Используй firebase.auth().signInWithPopup(...) или signInWithEmailAndPassword(...)
+6. После входа сохраняй `user.uid` и скрывай/показывай интерфейс
+
+❗️Для локальной разработки можно использовать мой тестовый ключ, но для продакшена нужен свой!

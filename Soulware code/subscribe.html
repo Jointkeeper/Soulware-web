@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Soulware — Subscribe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="js/lang.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <header class="flex justify-between items-center p-4 border-b border-gray-700">
+    <h1 class="text-xl font-bold">Soulware</h1>
+    <select id="lang-select" class="bg-gray-800 text-white border border-gray-600 p-2 rounded">
+      <option value="en">EN</option>
+      <option value="ru">RU</option>
+    </select>
+  </header>
+
+  <main class="p-6 max-w-3xl mx-auto space-y-10">
+    <section class="text-center">
+      <h2 class="text-2xl font-bold" data-i18n="subscribe_title">Support Soulware</h2>
+      <p class="text-gray-400 mt-2" data-i18n="subscribe_desc">
+        Help us grow and unlock the full Soulware experience.
+      </p>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-gray-800 p-6 rounded shadow">
+        <h3 class="text-xl font-semibold mb-2">Free</h3>
+        <ul class="list-disc pl-6 text-gray-300 mb-4">
+          <li>Access to standard tests</li>
+          <li>Basic results and explanations</li>
+          <li>Guest mode allowed</li>
+        </ul>
+        <button class="bg-gray-700 px-4 py-2 rounded">You're on Free</button>
+      </div>
+
+      <div class="bg-purple-800 p-6 rounded shadow">
+        <h3 class="text-xl font-semibold mb-2">Premium</h3>
+        <ul class="list-disc pl-6 text-gray-100 mb-4">
+          <li>Full personalized results</li>
+          <li>Visualizations and AI avatar</li>
+          <li>Media recommendations</li>
+          <li>Meta-test access</li>
+          <li>Save history & profile map</li>
+        </ul>
+        <button id="activate-premium" class="bg-purple-600 px-4 py-2 rounded hover:bg-purple-700">Activate Premium</button>
+      </div>
+    </section>
+
+    <section class="text-center">
+      <p class="text-sm text-gray-500 mt-4">
+        Powered by your curiosity and support 💜
+      </p>
+    </section>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-4 border-t border-gray-700 mt-12">
+    <p data-i18n="footer_text"></p>
+  </footer>
+
+  <script>
+    document.getElementById("activate-premium").addEventListener("click", () => {
+      localStorage.setItem("premium", "true");
+      alert("🎉 Premium activated! You now have full access.");
+    });
+  </script>
+</body>
+</html>

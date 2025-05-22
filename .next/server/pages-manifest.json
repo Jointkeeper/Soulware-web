@@ -1,0 +1,8 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/api/create-checkout-session": "pages/api/create-checkout-session.js",
+  "/api/generate-avatar": "pages/api/generate-avatar.js",
+  "/api/webhooks/stripe": "pages/api/webhooks/stripe.js",
+  "/_document": "pages/_document.js"
+}

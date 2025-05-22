@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Soulware — Take Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="js/lang.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <header class="flex justify-between items-center p-4 border-b border-gray-700">
+    <h1 class="text-xl font-bold">Soulware</h1>
+    <select id="lang-select" class="bg-gray-800 text-white border border-gray-600 p-2 rounded">
+      <option value="en">EN</option>
+      <option value="ru">RU</option>
+    </select>
+  </header>
+
+  <main class="p-6 max-w-2xl mx-auto space-y-6" id="test-container">
+    <h2 class="text-2xl font-bold text-center" data-i18n="test_title">Example Test</h2>
+
+    <div id="question-block" class="space-y-4">
+      <!-- Question will be rendered here -->
+    </div>
+
+    <div class="flex justify-between">
+      <button id="prev-btn" class="bg-gray-700 px-4 py-2 rounded disabled:opacity-50" disabled>&larr;</button>
+      <button id="next-btn" class="bg-purple-600 px-6 py-2 rounded hover:bg-purple-700">Next</button>
+    </div>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-4 border-t border-gray-700 mt-12">
+    <p data-i18n="footer_text"></p>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        text: {
+          en: "What do you value most?",
+          ru: "Что ты ценишь больше всего?"
+        },
+        options: ["Freedom", "Order", "Creativity", "Connection"]
+      },
+      {
+        text: {
+          en: "What scares you the most?",
+          ru: "Что пугает тебя больше всего?"
+        },
+        options: ["Being forgotten", "Losing control", "Being ordinary", "Being alone"]
+      },
+      {
+        text: {
+          en: "Choose your element:",
+          ru: "Выбери свою стихию:"
+        },
+        options: ["Fire", "Water", "Air", "Earth"]
+      }
+    ];
+
+    let current = 0;
+    const responses = [];
+
+    function renderQuestion(lang = "en") {
+      const q = questions[current];
+      const container = document.getElementById("question-block");
+      container.innerHTML = `<p class="text-lg font-semibold">${q.text[lang]}</p>`;
+
+      q.options.forEach((opt, i) => {
+        const id = `opt-${current}-${i}`;
+        const label = document.createElement("label");
+        label.className = "block bg-gray-800 p-3 rounded mb-2 cursor-pointer hover:bg-gray-700";
+        label.innerHTML = `<input type="radio" name="question" value="${opt}" class="mr-2" id="${id}">${opt}`;
+        container.appendChild(label);
+      });
+
+      document.getElementById("prev-btn").disabled = current === 0;
+      document.getElementById("next-btn").innerText = current === questions.length - 1 ? "Finish" : "Next";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("lang") || "en";
+      renderQuestion(lang);
+
+      document.getElementById("next-btn").addEventListener("click", () => {
+        const selected = document.querySelector('input[name="question"]:checked');
+        if (selected) {
+          responses[current] = selected.value;
+          if (current < questions.length - 1) {
+            current++;
+            renderQuestion(lang);
+          } else {
+            localStorage.setItem("last_test_result", JSON.stringify(responses));
+            window.location.href = "result.html";
+          }
+        } else {
+          alert("Please select an answer.");
+        }
+      });
+
+      document.getElementById("prev-btn").addEventListener("click", () => {
+        if (current > 0) {
+          current--;
+          renderQuestion(lang);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Каталог тестов — Soulware</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="js/lang.js"></script>
+  <script defer src="js/auth.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <!-- Навигационная панель (такая же как на главной) -->
+  <header class="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="text-xl font-bold text-purple-400">Soulware</a>
+      <nav class="hidden md:flex space-x-6 text-sm">
+        <a href="catalog.html" class="hover:text-purple-400 transition-colors">Тесты</a>
+        <a href="daily.html" class="hover:text-purple-400 transition-colors">Тест дня</a>
+        <a href="recommendations.html" class="hover:text-purple-400 transition-colors">Рекомендации</a>
+        <a href="profile.html" class="hover:text-purple-400 transition-colors">Личный кабинет</a>
+        <a href="subscribe.html" class="hover:text-purple-400 transition-colors">Поддержка</a>
+        <button id="auth-button" class="bg-purple-600 hover:bg-purple-700 px-4 py-1 rounded transition-colors">
+          Войти
+        </button>
+      </nav>
+      <button class="md:hidden text-gray-400 hover:text-white" id="mobile-menu-button">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Мобильное меню -->
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="catalog.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Тесты</a>
+        <a href="daily.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Тест дня</a>
+        <a href="recommendations.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Рекомендации</a>
+        <a href="profile.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Личный кабинет</a>
+        <a href="subscribe.html" class="block px-3 py-2 hover:bg-gray-700 rounded">Поддержка</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="p-6 max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold text-purple-300 mb-4">Каталог тестов</h1>
+      <p class="text-gray-400">Исследуйте себя через призму мифов, архетипов и психологии</p>
+    </div>
+
+    <!-- Поиск и фильтры -->
+    <div class="mb-8 space-y-4">
+      <!-- Поиск -->
+      <div class="relative">
+        <input type="text" id="search-input" 
+               placeholder="Поиск тестов..." 
+               class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:border-purple-500">
+        <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </div>
+
+      <!-- Фильтры -->
+      <div class="flex flex-wrap gap-4">
+        <div class="flex-1 min-w-[200px]">
+          <select id="category-filter" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-500">
+            <option value="all">Все категории</option>
+            <option value="personality">Личностные</option>
+            <option value="career">Профориентация</option>
+            <option value="relationships">Отношения</option>
+            <option value="emotional">Эмоциональный интеллект</option>
+            <option value="cognitive">Когнитивные способности</option>
+            <option value="mental_health">Психическое здоровье</option>
+            <option value="development">Личностный рост</option>
+            <option value="social">Социальные навыки</option>
+            <option value="leadership">Лидерство</option>
+            <option value="stress">Стресс и выгорание</option>
+            <option value="creativity">Креативность</option>
+            <option value="motivation">Мотивация</option>
+            <option value="values">Ценности и убеждения</option>
+            <option value="humor">Юмористические</option>
+            <option value="mythology">Мифологические</option>
+            <option value="scenario">Сценарные</option>
+            <option value="lifestyle">Здоровье и образ жизни</option>
+            <option value="finance">Финансовая грамотность</option>
+            <option value="self_esteem">Самооценка</option>
+            <option value="communication">Коммуникация</option>
+            <option value="culture">Культура и искусство</option>
+            <option value="ethics">Этические дилеммы</option>
+            <option value="creative_thinking">Творческое мышление</option>
+          </select>
+        </div>
+        <div class="flex-1 min-w-[200px]">
+          <select id="difficulty-filter" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-500">
+            <option value="all">Все уровни</option>
+            <option value="beginner">Начальный</option>
+            <option value="intermediate">Средний</option>
+            <option value="advanced">Продвинутый</option>
+          </select>
+        </div>
+        <div class="flex-1 min-w-[200px]">
+          <select id="duration-filter" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-purple-500">
+            <option value="all">Любая длительность</option>
+            <option value="short">До 10 минут</option>
+            <option value="medium">10-30 минут</option>
+            <option value="long">Более 30 минут</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Сетка тестов -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="test-grid">
+      <!-- Тесты будут добавлены через JavaScript -->
+      <div class="animate-pulse">
+        <div class="bg-gray-800 rounded-lg p-6">
+          <div class="h-4 bg-gray-700 rounded w-3/4 mb-4"></div>
+          <div class="h-4 bg-gray-700 rounded w-1/2 mb-2"></div>
+          <div class="h-4 bg-gray-700 rounded w-1/4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Пагинация -->
+    <div class="mt-8 flex justify-center space-x-2">
+      <button id="prev-page" class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+        Назад
+      </button>
+      <div id="page-numbers" class="flex space-x-2">
+        <!-- Номера страниц будут добавлены через JavaScript -->
+      </div>
+      <button id="next-page" class="px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+        Вперёд
+      </button>
+    </div>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-4 border-t border-gray-700 mt-12">
+    <p data-i18n="footer_text">© 2025 Soulware. Все права защищены.</p>
+  </footer>
+
+  <script>
+    // Расширенный список тестов
+    const tests = [
+      { 
+        id: 1, 
+        title: { en: "Archetype Mirror", ru: "Зеркало Архетипов" },
+        description: { 
+          en: "Discover your dominant archetypes and their influence on your life",
+          ru: "Откройте ваши доминирующие архетипы и их влияние на вашу жизнь"
+        },
+        category: "archetype",
+        difficulty: "intermediate",
+        duration: "medium",
+        premium: true,
+        image: "https://placekitten.com/300/200"
+      },
+      { 
+        id: 2, 
+        title: { en: "Shadow Integration", ru: "Интеграция Тени" },
+        description: {
+          en: "Explore and understand your shadow aspects",
+          ru: "Исследуйте и поймите аспекты вашей Тени"
+        },
+        category: "shadow",
+        difficulty: "advanced",
+        duration: "long",
+        premium: true,
+        image: "https://placekitten.com/301/200"
+      },
+      { 
+        id: 3, 
+        title: { en: "Mythological Heroes", ru: "Герои Мифов" },
+        description: {
+          en: "Which mythological hero resonates with your journey?",
+          ru: "Какой мифологический герой созвучен вашему пути?"
+        },
+        category: "myth",
+        difficulty: "beginner",
+        duration: "short",
+        premium: false,
+        image: "https://placekitten.com/302/200"
+      }
+    ];
+
+    // Состояние приложения
+    let state = {
+      currentPage: 1,
+      itemsPerPage: 9,
+      filters: {
+        category: 'all',
+        difficulty: 'all',
+        duration: 'all',
+        search: ''
+      }
+    };
+
+    // Функция рендеринга тестов
+    function renderTests() {
+      const container = document.getElementById('test-grid');
+      const lang = localStorage.getItem('lang') || 'ru';
+      
+      // Применяем фильтры
+      let filteredTests = tests.filter(test => {
+        const matchesCategory = state.filters.category === 'all' || test.category === state.filters.category;
+        const matchesDifficulty = state.filters.difficulty === 'all' || test.difficulty === state.filters.difficulty;
+        const matchesDuration = state.filters.duration === 'all' || test.duration === state.filters.duration;
+        const matchesSearch = test.title[lang].toLowerCase().includes(state.filters.search.toLowerCase()) ||
+                            test.description[lang].toLowerCase().includes(state.filters.search.toLowerCase());
+        
+        return matchesCategory && matchesDifficulty && matchesDuration && matchesSearch;
+      });
+
+      // Пагинация
+      const start = (state.currentPage - 1) * state.itemsPerPage;
+      const paginatedTests = filteredTests.slice(start, start + state.itemsPerPage);
+
+      // Очищаем контейнер
+      container.innerHTML = '';
+
+      // Рендерим тесты
+      paginatedTests.forEach(test => {
+        const card = document.createElement('div');
+        card.className = 'bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-750 transition-colors';
+        
+        card.innerHTML = `
+          <img src="${test.image}" alt="${test.title[lang]}" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-semibold">${test.title[lang]}</h3>
+              ${test.premium ? '<span class="text-purple-400">👑 Premium</span>' : ''}
+            </div>
+            <p class="text-gray-400 mb-4">${test.description[lang]}</p>
+            <div class="flex items-center justify-between">
+              <div class="flex space-x-2">
+                <span class="text-sm text-gray-500">${getDifficultyLabel(test.difficulty, lang)}</span>
+                <span class="text-sm text-gray-500">•</span>
+                <span class="text-sm text-gray-500">${getDurationLabel(test.duration, lang)}</span>
+              </div>
+              <button onclick="startTest(${test.id})" 
+                      class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">
+                Начать
+              </button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      // Обновляем пагинацию
+      updatePagination(filteredTests.length);
+    }
+
+    // Вспомогательные функции
+    function getDifficultyLabel(difficulty, lang) {
+      const labels = {
+        beginner: { ru: "Начальный", en: "Beginner" },
+        intermediate: { ru: "Средний", en: "Intermediate" },
+        advanced: { ru: "Продвинутый", en: "Advanced" }
+      };
+      return labels[difficulty][lang];
+    }
+
+    function getDurationLabel(duration, lang) {
+      const labels = {
+        short: { ru: "До 10 мин", en: "Under 10 min" },
+        medium: { ru: "10-30 мин", en: "10-30 min" },
+        long: { ru: "30+ мин", en: "30+ min" }
+      };
+      return labels[duration][lang];
+    }
+
+    function updatePagination(totalItems) {
+      const totalPages = Math.ceil(totalItems / state.itemsPerPage);
+      const container = document.getElementById('page-numbers');
+      container.innerHTML = '';
+
+      // Добавляем номера страниц
+      for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.className = `px-4 py-2 rounded-lg ${
+          i === state.currentPage ? 'bg-purple-600' : 'bg-gray-800 hover:bg-gray-700'
+        }`;
+        button.textContent = i;
+        button.onclick = () => {
+          state.currentPage = i;
+          renderTests();
+        };
+        container.appendChild(button);
+      }
+
+      // Обновляем состояние кнопок
+      document.getElementById('prev-page').disabled = state.currentPage === 1;
+      document.getElementById('next-page').disabled = state.currentPage === totalPages;
+    }
+
+    function startTest(testId) {
+      // Проверяем авторизацию
+      if (!window.auth.isAuthenticated) {
+        window.location.href = `/login.html?redirect=test.html?id=${testId}`;
+        return;
+      }
+
+      // Проверяем премиум статус
+      const test = tests.find(t => t.id === testId);
+      if (test.premium && !window.auth.user?.isPremium) {
+        window.location.href = '/subscribe.html';
+        return;
+      }
+
+      // Переходим к тесту
+      window.location.href = `/test.html?id=${testId}`;
+    }
+
+    // Инициализация
+    document.addEventListener('DOMContentLoaded', () => {
+      // Мобильное меню
+      document.getElementById('mobile-menu-button').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+      });
+
+      // Поиск
+      let searchTimeout;
+      document.getElementById('search-input').addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+          state.filters.search = e.target.value;
+          state.currentPage = 1;
+          renderTests();
+        }, 300);
+      });
+
+      // Фильтры
+      ['category', 'difficulty', 'duration'].forEach(filter => {
+        document.getElementById(`${filter}-filter`).addEventListener('change', (e) => {
+          state.filters[filter] = e.target.value;
+          state.currentPage = 1;
+          renderTests();
+        });
+      });
+
+      // Пагинация
+      document.getElementById('prev-page').addEventListener('click', () => {
+        if (state.currentPage > 1) {
+          state.currentPage--;
+          renderTests();
+        }
+      });
+
+      document.getElementById('next-page').addEventListener('click', () => {
+        const totalPages = Math.ceil(tests.length / state.itemsPerPage);
+        if (state.currentPage < totalPages) {
+          state.currentPage++;
+          renderTests();
+        }
+      });
+
+      // Первый рендер
+      renderTests();
+    });
+  </script>
+</body>
+</html>

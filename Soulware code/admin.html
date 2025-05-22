@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Soulware — Admin Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <main class="p-6 max-w-4xl mx-auto">
+    <div id="login-screen" class="text-center space-y-4">
+      <h1 class="text-2xl font-bold">Admin Login</h1>
+      <input type="password" id="admin-pass" placeholder="Enter admin password"
+             class="p-2 rounded bg-gray-800 border border-gray-600 w-full max-w-xs" />
+      <button onclick="login()" class="bg-purple-700 px-4 py-2 rounded hover:bg-purple-800">Enter</button>
+      <p id="login-error" class="text-red-400 hidden">Incorrect password</p>
+    </div>
+
+    <div id="admin-panel" class="hidden space-y-10">
+      <h1 class="text-3xl font-bold text-center">Soulware Admin Panel</h1>
+
+      <section>
+        <h2 class="text-xl font-semibold mb-2">Manage Tests (LocalStorage)</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="test-editor"></div>
+        <button onclick="addTest()" class="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 mt-4">+ Add New Test</button>
+        <button onclick="saveTests()" class="bg-green-600 px-4 py-2 rounded hover:bg-green-700 mt-4">💾 Save All</button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const password = "soulroot";
+
+    function login() {
+      const input = document.getElementById("admin-pass").value;
+      if (input === password) {
+        document.getElementById("login-screen").classList.add("hidden");
+        document.getElementById("admin-panel").classList.remove("hidden");
+        loadTests();
+      } else {
+        document.getElementById("login-error").classList.remove("hidden");
+      }
+    }
+
+    function loadTests() {
+      const tests = JSON.parse(localStorage.getItem("custom_tests") || "[]");
+      const container = document.getElementById("test-editor");
+      container.innerHTML = "";
+      tests.forEach((test, index) => {
+        const block = document.createElement("div");
+        block.className = "bg-gray-800 p-4 rounded shadow space-y-2";
+
+        block.innerHTML = \`
+          <input class="w-full p-2 rounded bg-gray-900 border border-gray-600" placeholder="Title EN" value="\${test.title.en || ""}" data-field="title.en" data-index="\${index}" />
+          <input class="w-full p-2 rounded bg-gray-900 border border-gray-600" placeholder="Title RU" value="\${test.title.ru || ""}" data-field="title.ru" data-index="\${index}" />
+          <select class="w-full p-2 rounded bg-gray-900 border border-gray-600" data-field="category" data-index="\${index}">
+            <option value="personality" \${test.category==="personality"?"selected":""}>Personality</option>
+            <option value="career" \${test.category==="career"?"selected":""}>Career</option>
+            <option value="relationships" \${test.category==="relationships"?"selected":""}>Relationships</option>
+            <option value="emotional" \${test.category==="emotional"?"selected":""}>Emotional Intelligence</option>
+            <option value="cognitive" \${test.category==="cognitive"?"selected":""}>Cognitive Abilities</option>
+            <option value="mental_health" \${test.category==="mental_health"?"selected":""}>Mental Health</option>
+            <option value="development" \${test.category==="development"?"selected":""}>Personal Development</option>
+            <option value="social" \${test.category==="social"?"selected":""}>Social Skills</option>
+            <option value="leadership" \${test.category==="leadership"?"selected":""}>Leadership</option>
+            <option value="stress" \${test.category==="stress"?"selected":""}>Stress & Burnout</option>
+            <option value="creativity" \${test.category==="creativity"?"selected":""}>Creativity</option>
+            <option value="motivation" \${test.category==="motivation"?"selected":""}>Motivation</option>
+            <option value="values" \${test.category==="values"?"selected":""}>Values & Beliefs</option>
+            <option value="humor" \${test.category==="humor"?"selected":""}>Humor</option>
+            <option value="mythology" \${test.category==="mythology"?"selected":""}>Mythology</option>
+            <option value="scenario" \${test.category==="scenario"?"selected":""}>Scenario-based</option>
+            <option value="lifestyle" \${test.category==="lifestyle"?"selected":""}>Lifestyle & Health</option>
+            <option value="finance" \${test.category==="finance"?"selected":""}>Financial Literacy</option>
+            <option value="self_esteem" \${test.category==="self_esteem"?"selected":""}>Self-Esteem</option>
+            <option value="communication" \${test.category==="communication"?"selected":""}>Communication</option>
+            <option value="culture" \${test.category==="culture"?"selected":""}>Culture & Arts</option>
+            <option value="ethics" \${test.category==="ethics"?"selected":""}>Ethical Dilemmas</option>
+            <option value="creative_thinking" \${test.category==="creative_thinking"?"selected":""}>Creative Thinking</option>
+          </select>
+          <label class="block mt-2"><input type="checkbox" \${test.premium ? "checked" : ""} data-field="premium" data-index="\${index}" /> Premium Only</label>
+        \`;
+
+        container.appendChild(block);
+      });
+    }
+
+    function saveTests() {
+      const tests = [];
+      const containers = document.querySelectorAll("#test-editor > div");
+      containers.forEach((block, index) => {
+        const en = block.querySelector('[data-field="title.en"]').value.trim();
+        const ru = block.querySelector('[data-field="title.ru"]').value.trim();
+        const category = block.querySelector('[data-field="category"]').value;
+        const premium = block.querySelector('[data-field="premium"]').checked;
+        tests.push({
+          id: index + 1,
+          title: { en, ru },
+          category,
+          premium
+        });
+      });
+      localStorage.setItem("custom_tests", JSON.stringify(tests, null, 2));
+      alert("✅ Tests saved to localStorage!");
+    }
+
+    function addTest() {
+      const current = JSON.parse(localStorage.getItem("custom_tests") || "[]");
+      current.push({ title: { en: "", ru: "" }, category: "self", premium: false });
+      localStorage.setItem("custom_tests", JSON.stringify(current));
+      loadTests();
+    }
+  </script>
+</body>
+</html>

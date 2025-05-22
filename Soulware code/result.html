@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Soulware — Test Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="js/lang.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <header class="flex justify-between items-center p-4 border-b border-gray-700">
+    <h1 class="text-xl font-bold">Soulware</h1>
+    <select id="lang-select" class="bg-gray-800 text-white border border-gray-600 p-2 rounded">
+      <option value="en">EN</option>
+      <option value="ru">RU</option>
+    </select>
+  </header>
+
+  <main class="p-6 max-w-3xl mx-auto space-y-8" id="result-container">
+    <section class="text-center">
+      <h2 class="text-2xl font-bold" data-i18n="result_title">Your Result</h2>
+      <p id="result-summary" class="text-lg text-purple-300 mt-4">Loading your soul map...</p>
+    </section>
+
+    <section id="recommendations-section">
+      <!-- Media recs or block notice inserted here -->
+    </section>
+
+    <section class="text-center space-y-4">
+      <button class="bg-gray-700 px-5 py-2 rounded hover:bg-gray-600" onclick="alert('Not implemented yet')">Compare with Friends</button>
+      <button class="bg-purple-700 px-5 py-2 rounded hover:bg-purple-800" onclick="alert('Your AI avatar thinks... something.')">What would your avatar say?</button>
+    </section>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-4 border-t border-gray-700 mt-12">
+    <p data-i18n="footer_text"></p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const responses = JSON.parse(localStorage.getItem("last_test_result") || "[]");
+      const summary = responses.length > 0 
+        ? "Based on your answers: " + responses.join(", ") 
+        : "No result found. Please take a test first.";
+
+      document.getElementById("result-summary").innerText = summary;
+
+      const isPremium = localStorage.getItem("premium") === "true";
+      const section = document.getElementById("recommendations-section");
+
+      if (!isPremium) {
+        section.innerHTML = \`
+          <div class="bg-gray-800 p-4 rounded text-center">
+            <h3 class="text-xl font-semibold mb-2">🔒 Media Recommendations</h3>
+            <p class="text-gray-400">Available to Premium users only.</p>
+            <a href="subscribe.html" class="text-purple-400 underline text-sm">Upgrade now to access personalized content.</a>
+          </div>
+        \`;
+      } else {
+        const recommendations = [
+          "Watch: Soul (Pixar)",
+          "Read: The Hero with a Thousand Faces by Joseph Campbell",
+          "Listen: Pink Floyd – Breathe",
+          "Do: Try journaling your thoughts tonight"
+        ];
+
+        section.innerHTML = \`
+          <h3 class="text-xl font-semibold mb-2" data-i18n="media_recommendations">Media Recommendations</h3>
+          <ul class="list-disc pl-6 text-gray-300" id="recommendations-list"></ul>
+        \`;
+
+        const list = document.getElementById("recommendations-list");
+        recommendations.forEach(item => {
+          const li = document.createElement("li");
+          li.innerText = item;
+          list.appendChild(li);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

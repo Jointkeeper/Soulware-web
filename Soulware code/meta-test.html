@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Soulware — Meta Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="js/lang.js"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+  <header class="flex justify-between items-center p-4 border-b border-gray-700">
+    <h1 class="text-xl font-bold">Soulware</h1>
+    <select id="lang-select" class="bg-gray-800 text-white border border-gray-600 p-2 rounded">
+      <option value="en">EN</option>
+      <option value="ru">RU</option>
+    </select>
+  </header>
+
+  <main class="p-6 max-w-3xl mx-auto space-y-8" id="meta-test-container">
+    <section class="text-center">
+      <h2 class="text-2xl font-bold" data-i18n="meta_test_title">The Meta-Test: Essence of You</h2>
+      <p class="text-gray-400 mt-2" data-i18n="meta_test_desc">
+        This final test combines all your previous answers into a deeper integration of your soul map.
+      </p>
+    </section>
+
+    <section id="meta-test-content" class="text-center">
+      <!-- Conditional content -->
+    </section>
+  </main>
+
+  <footer class="text-center text-gray-500 text-sm p-4 border-t border-gray-700 mt-12">
+    <p data-i18n="footer_text"></p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("meta-test-content");
+      const responses = JSON.parse(localStorage.getItem("last_test_result") || "[]");
+      const isPremium = localStorage.getItem("premium") === "true";
+
+      if (!isPremium) {
+        container.innerHTML = \`
+          <p class="text-red-400 mb-4">🚫 This test is available to Premium members only.</p>
+          <a href="subscribe.html" class="inline-block mt-4 text-purple-400 underline">Go to Subscription Page</a>
+        \`;
+        return;
+      }
+
+      if (responses.length >= 3) {
+        container.innerHTML = \`
+          <p class="text-green-400 mb-4">🧩 Access granted. You are ready.</p>
+          <p class="text-gray-300 mb-4">Merging shadow, archetype, value, and your inner contradictions...</p>
+          <div class="bg-gray-800 p-4 rounded shadow">
+            <p><strong>Your Soulware Synthesis:</strong></p>
+            <p class="mt-2">\${responses.join(" • ")}</p>
+          </div>
+        \`;
+      } else {
+        container.innerHTML = \`
+          <p class="text-yellow-400">⚠️ You need to complete at least 3 tests to unlock the Meta-Test.</p>
+          <a href="catalog.html" class="mt-4 inline-block text-purple-400 underline">Go to Test Catalog</a>
+        \`;
+      }
+    });
+  </script>
+</body>
+</html>
