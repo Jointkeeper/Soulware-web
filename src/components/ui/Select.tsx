@@ -15,6 +15,10 @@ interface SelectProps {
   label?: string;
   error?: boolean;
   className?: string;
+  "aria-describedby"?: string;
+  "aria-labelledby"?: string;
+  "aria-invalid"?: boolean;
+  "aria-required"?: boolean;
 }
 
 export function Select({
@@ -24,6 +28,7 @@ export function Select({
   label,
   error,
   className,
+  ...ariaProps
 }: SelectProps) {
   return (
     <Listbox value={value} onChange={onChange}>
@@ -39,6 +44,7 @@ export function Select({
             error && 'border-red-500 focus:ring-red-400',
             className
           )}
+          {...ariaProps}
         >
           <span className="block truncate">{value.label}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -55,38 +61,44 @@ export function Select({
           leaveTo="opacity-0"
         >
           <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm dark:bg-gray-900">
-            {options.map((option) => (
-              <Listbox.Option
-                key={option.value}
-                className={({ active }) =>
-                  cn(
-                    'relative cursor-default select-none py-2 pl-10 pr-4',
-                    active
-                      ? 'bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100'
-                      : 'text-gray-900 dark:text-gray-100'
-                  )
-                }
-                value={option}
-              >
-                {({ selected }) => (
-                  <>
-                    <span
-                      className={cn(
-                        'block truncate',
-                        selected ? 'font-medium' : 'font-normal'
-                      )}
-                    >
-                      {option.label}
-                    </span>
-                    {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-purple-600 dark:text-purple-400">
-                        <CheckIcon className="h-5 w-5" aria-hidden="true" />
+            {options.length === 0 ? (
+              <div className="relative cursor-default select-none py-2 px-4 text-gray-700 dark:text-gray-300">
+                Нет опций
+              </div>
+            ) : (
+              options.map((option) => (
+                <Listbox.Option
+                  key={option.value}
+                  className={({ active }) =>
+                    cn(
+                      'relative cursor-default select-none py-2 pl-10 pr-4',
+                      active
+                        ? 'bg-purple-100 text-purple-900 dark:bg-purple-900 dark:text-purple-100'
+                        : 'text-gray-900 dark:text-gray-100'
+                    )
+                  }
+                  value={option}
+                >
+                  {({ selected }) => (
+                    <>
+                      <span
+                        className={cn(
+                          'block truncate',
+                          selected ? 'font-medium' : 'font-normal'
+                        )}
+                      >
+                        {option.label}
                       </span>
-                    ) : null}
-                  </>
-                )}
-              </Listbox.Option>
-            ))}
+                      {selected ? (
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-purple-600 dark:text-purple-400">
+                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                      ) : null}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))
+            )}
           </Listbox.Options>
         </Transition>
       </div>

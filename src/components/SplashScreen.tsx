@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+const LOGO_DISPLAY_DURATION = 3000;
+const SLOGAN_DISPLAY_DURATION = 3000;
+
 interface SplashScreenProps {
   onFinished: () => void;
 }
@@ -10,21 +13,30 @@ export function SplashScreen({ onFinished }: SplashScreenProps) {
   const [showSlogan, setShowSlogan] = useState(false);
 
   useEffect(() => {
-    // Показываем логотип 3 секунды
+    let isMounted = true;
+
+    // Показываем логотип
     const logoTimer = setTimeout(() => {
-      setShowLogo(false);
-      setShowSlogan(true);
+      if (isMounted) {
+        setShowLogo(false);
+        setShowSlogan(true);
+      }
       
-      // Показываем слоган 3 секунды
+      // Показываем слоган
       const sloganTimer = setTimeout(() => {
-        setShowSlogan(false);
-        onFinished();
-      }, 3000);
+        if (isMounted) {
+          setShowSlogan(false);
+          onFinished();
+        }
+      }, SLOGAN_DISPLAY_DURATION);
 
       return () => clearTimeout(sloganTimer);
-    }, 3000);
+    }, LOGO_DISPLAY_DURATION);
 
-    return () => clearTimeout(logoTimer);
+    return () => {
+      isMounted = false;
+      clearTimeout(logoTimer);
+    };
   }, [onFinished]);
 
   if (!showLogo && !showSlogan) return null;
@@ -39,6 +51,7 @@ export function SplashScreen({ onFinished }: SplashScreenProps) {
             width={300}
             height={300}
             className="object-contain"
+            priority
           />
         </div>
       )}

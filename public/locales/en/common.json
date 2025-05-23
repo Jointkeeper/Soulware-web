@@ -1,0 +1,168 @@
+{
+  " ": "<todo-translate>",
+  "*": "<todo-translate>",
+  "./supabase": "<todo-translate>",
+  "admin": {
+    "title": "Admin Panel",
+    "users": "Users",
+    "tests": "Tests"
+  },
+  "ads": {
+    "partnerMaterial": "Partner Material"
+  },
+  "ads.partnerMaterial": "<todo-translate>",
+  "auth": {
+    "loginSuccess": "Login successful",
+    "loginError": "Login error: {{message}}",
+    "registerSuccess": "Registration successful",
+    "registerError": "Registration error: {{message}}",
+    "logoutSuccess": "Logout successful",
+    "logoutError": "Logout error: {{message}}"
+  },
+  "auth.loginSuccess": "<todo-translate>",
+  "auth.logoutSuccess": "<todo-translate>",
+  "auth.registerSuccess": "<todo-translate>",
+  "avatar": {
+    "generateSuccess": "Avatar generated successfully",
+    "generateError": "Avatar generation error: {{message}}"
+  },
+  "avatar.generateSuccess": "<todo-translate>",
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "noData": "No data",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "pageNotFound": "Page not found",
+    "goHome": "Go Home"
+  },
+  "common.loading": "<todo-translate>",
+  "footer": {
+    "slogan": "Discover yourself with <span class='text-purple-300'>Soulware</span>",
+    "description": "A platform for psychological self-discovery and development.",
+    "url": "https://soulware.com",
+    "urlText": "soulware.com"
+  },
+  "footer.description": "<todo-translate>",
+  "footer.slogan": "<todo-translate>",
+  "footer.url": "<todo-translate>",
+  "footer.urlText": "<todo-translate>",
+  "home": {
+    "welcome": "Welcome to Soulware!",
+    "tagline": "Explore the depths of your personality with our tests."
+  },
+  "home.tagline": "<todo-translate>",
+  "home.welcome": "<todo-translate>",
+  "nav": {
+    "tests": "Tests",
+    "daily": "Daily",
+    "recommendations": "Recommendations",
+    "profile": "Profile",
+    "support": "Support",
+    "switchToLight": "Switch to light theme",
+    "switchToDark": "Switch to dark theme",
+    "changeLanguage": "Change language",
+    "russian": "Russian",
+    "english": "English",
+    "signOut": "Sign Out",
+    "signIn": "Sign In",
+    "toggleMenu": "Toggle menu",
+    "settings": "Settings"
+  },
+  "nav.changeLanguage": "<todo-translate>",
+  "nav.daily": "<todo-translate>",
+  "nav.english": "<todo-translate>",
+  "nav.profile": "<todo-translate>",
+  "nav.recommendations": "<todo-translate>",
+  "nav.russian": "<todo-translate>",
+  "nav.settings": "<todo-translate>",
+  "nav.signIn": "<todo-translate>",
+  "nav.signOut": "<todo-translate>",
+  "nav.support": "<todo-translate>",
+  "nav.tests": "<todo-translate>",
+  "nav.toggleMenu": "<todo-translate>",
+  "select": {
+    "noOptions": "No options available"
+  },
+  "stripe_customer_id": "<todo-translate>",
+  "subscription": {
+    "updateSuccess": "Subscription updated successfully",
+    "updateError": "Subscription update error: {{message}}",
+    "aiCounterReset": "AI test counter reset",
+    "aiCounterResetError": "AI test counter reset error: {{message}}",
+    "aiUsageIncrementError": "Error incrementing AI test usage: {{message}}",
+    "features": "Subscription Features",
+    "aiTests": "AI Tests (per day)",
+    "unlimited": "Unlimited",
+    "staticTests": "Static Tests",
+    "analytics": "Analytics & History",
+    "advertising": "Advertising",
+    "support": "Support",
+    "apiAccess": "API Access",
+    "customBranding": "Custom Branding",
+    "dataExport": "Data Export",
+    "upgrade": "Upgrade Subscription",
+    "upgradeInfo": "Upgrade your plan to access more features.",
+    "manageSubscription": "Manage Subscription"
+  },
+  "subscription.advertising": "<todo-translate>",
+  "subscription.aiCounterReset": "<todo-translate>",
+  "subscription.aiTests": "<todo-translate>",
+  "subscription.analytics": "<todo-translate>",
+  "subscription.apiAccess": "<todo-translate>",
+  "subscription.customBranding": "<todo-translate>",
+  "subscription.dataExport": "<todo-translate>",
+  "subscription.features": "<todo-translate>",
+  "subscription.staticTests": "<todo-translate>",
+  "subscription.support": "<todo-translate>",
+  "subscription.unlimited": "<todo-translate>",
+  "subscription.updateSuccess": "<todo-translate>",
+  "subscription.upgrade": "<todo-translate>",
+  "subscription.upgradeInfo": "<todo-translate>",
+  "testCard": {
+    "durationLabel": "Duration",
+    "difficultyLabel": "Difficulty",
+    "accessLabel": "Access",
+    "premium": "Premium",
+    "free": "Free",
+    "startTestButton": "Start Test"
+  },
+  "testCard.accessLabel": "<todo-translate>",
+  "testCard.difficultyLabel": "<todo-translate>",
+  "testCard.durationLabel": "<todo-translate>",
+  "testCard.free": "<todo-translate>",
+  "testCard.premium": "<todo-translate>",
+  "testCard.startTestButton": "<todo-translate>",
+  "testHistory": {
+    "empty": "Test history is empty.",
+    "personalityAvatar": "Personality Avatar",
+    "personalityProfile": "Personality Profile",
+    "noScores": "No scores available for this test.",
+    "noAiText": "AI analysis for this result has not been generated yet or is missing.",
+    "recommendations": "Recommendations based on this test"
+  },
+  "testHistory.empty": "<todo-translate>",
+  "testHistory.noAiText": "<todo-translate>",
+  "testHistory.noScores": "<todo-translate>",
+  "testHistory.personalityAvatar": "<todo-translate>",
+  "testHistory.personalityProfile": "<todo-translate>",
+  "testHistory.recommendations": "<todo-translate>",
+  "testResult": {
+    "noScores": "Scores are not available.",
+    "noAiAnalysis": "AI analysis is not available.",
+    "recommendations": "Recommendations"
+  },
+  "testResult.noAiAnalysis": "<todo-translate>",
+  "testResult.noScores": "<todo-translate>",
+  "testResult.recommendations": "<todo-translate>",
+  "theme": {
+    "changed": "Theme changed to {{theme}}"
+  },
+  "userProfile": {
+    "title": "My Profile",
+    "testHistoryLink": "My Test History",
+    "subscriptionStatus": "Subscription Status"
+  }
+}

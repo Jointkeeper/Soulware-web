@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { formatDuration, formatDifficulty } from '@/lib/utils';
-import { Test } from '@/types';
+import { Test } from '@/types/test';
 
 interface TestCardProps {
   test: Test;
@@ -11,41 +11,48 @@ interface TestCardProps {
 }
 
 export function TestCard({ test, onStart }: TestCardProps) {
-  const { t, i18n } = useTranslation();
-  const currentLang = i18n.language as 'ru' | 'en';
+  const { t, i18n } = useTranslation('common');
+  const currentLang = i18n.language as keyof typeof test.title;
+
+  const handleStartTest = () => {
+    onStart(test.id);
+  };
 
   return (
-    <Card>
+    <Card className="flex flex-col h-full">
       <CardHeader>
-        <div className="relative h-48 w-full">
-          <Image
-            src={test.image}
-            alt={test.title[currentLang]}
-            fill
-            className="object-cover rounded-t-lg"
-          />
-          {test.premium && (
-            <div className="absolute top-2 right-2 bg-purple-600 text-white px-2 py-1 rounded text-sm">
-              Premium
-            </div>
-          )}
-        </div>
-        <CardTitle>{test.title[currentLang]}</CardTitle>
+        {test.image && (
+          <div className="relative h-40 w-full mb-4">
+            <Image
+              src={test.image}
+              alt={test.title[currentLang] || test.title.ru}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-t-lg"
+            />
+          </div>
+        )}
+        <CardTitle>{test.title[currentLang] || test.title.ru}</CardTitle>
+        <p className="text-sm text-gray-500">
+          {test.description[currentLang] || test.description.ru}
+        </p>
       </CardHeader>
-      <CardContent>
-        <p className="text-gray-400 mb-4">{test.description[currentLang]}</p>
-        <div className="flex items-center justify-between text-sm text-gray-500">
-          <span>{formatDifficulty(test.difficulty)}</span>
-          <span>•</span>
-          <span>{formatDuration(test.duration)}</span>
+      <CardContent className="flex-grow">
+        <div className="text-sm text-gray-600 space-y-1">
+          <p>
+            {t('testCard.durationLabel')}: {formatDuration(test.duration, i18n.language)}
+          </p>
+          <p>
+            {t('testCard.difficultyLabel')}: {formatDifficulty(test.difficulty, i18n.language)}
+          </p>
+          <p>
+            {t('testCard.accessLabel')}: {test.requiredTier !== 'free' ? t('testCard.premium') : t('testCard.free')}
+          </p>
         </div>
       </CardContent>
       <CardFooter>
-        <Button
-          onClick={() => onStart(test.id)}
-          className="w-full"
-        >
-          {t('test.start')}
+        <Button onClick={handleStartTest} className="w-full">
+          {t('testCard.startTestButton')}
         </Button>
       </CardFooter>
     </Card>

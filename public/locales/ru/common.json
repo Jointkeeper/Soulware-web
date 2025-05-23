@@ -1,0 +1,168 @@
+{
+  " ": "<todo-translate>",
+  "*": "<todo-translate>",
+  "./supabase": "<todo-translate>",
+  "admin": {
+    "title": "Панель администратора",
+    "users": "Пользователи",
+    "tests": "Тесты"
+  },
+  "ads": {
+    "partnerMaterial": "Партнерский материал"
+  },
+  "ads.partnerMaterial": "<todo-translate>",
+  "auth": {
+    "loginSuccess": "Вход выполнен успешно",
+    "loginError": "Ошибка входа: {{message}}",
+    "registerSuccess": "Регистрация успешна",
+    "registerError": "Ошибка регистрации: {{message}}",
+    "logoutSuccess": "Выход выполнен",
+    "logoutError": "Ошибка выхода: {{message}}"
+  },
+  "auth.loginSuccess": "<todo-translate>",
+  "auth.logoutSuccess": "<todo-translate>",
+  "auth.registerSuccess": "<todo-translate>",
+  "avatar": {
+    "generateSuccess": "Аватар успешно сгенерирован",
+    "generateError": "Ошибка генерации аватара: {{message}}"
+  },
+  "avatar.generateSuccess": "<todo-translate>",
+  "common": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "success": "Успешно",
+    "noData": "Нет данных",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "close": "Закрыть",
+    "pageNotFound": "Страница не найдена",
+    "goHome": "Вернуться на главную"
+  },
+  "common.loading": "<todo-translate>",
+  "footer": {
+    "slogan": "Открой себя с <span class='text-purple-300'>Soulware</span>",
+    "description": "Платформа для психологического самопознания и развития.",
+    "url": "https://soulware.com",
+    "urlText": "soulware.com"
+  },
+  "footer.description": "<todo-translate>",
+  "footer.slogan": "<todo-translate>",
+  "footer.url": "<todo-translate>",
+  "footer.urlText": "<todo-translate>",
+  "home": {
+    "welcome": "Добро пожаловать в Soulware!",
+    "tagline": "Исследуйте глубины своей личности с помощью наших тестов."
+  },
+  "home.tagline": "<todo-translate>",
+  "home.welcome": "<todo-translate>",
+  "nav": {
+    "tests": "Тесты",
+    "daily": "Ежедневные",
+    "recommendations": "Рекомендации",
+    "profile": "Профиль",
+    "support": "Поддержка",
+    "switchToLight": "Переключить на светлую тему",
+    "switchToDark": "Переключить на темную тему",
+    "changeLanguage": "Сменить язык",
+    "russian": "Русский",
+    "english": "English",
+    "signOut": "Выйти",
+    "signIn": "Войти",
+    "toggleMenu": "Открыть меню",
+    "settings": "Настройки"
+  },
+  "nav.changeLanguage": "<todo-translate>",
+  "nav.daily": "<todo-translate>",
+  "nav.english": "<todo-translate>",
+  "nav.profile": "<todo-translate>",
+  "nav.recommendations": "<todo-translate>",
+  "nav.russian": "<todo-translate>",
+  "nav.settings": "<todo-translate>",
+  "nav.signIn": "<todo-translate>",
+  "nav.signOut": "<todo-translate>",
+  "nav.support": "<todo-translate>",
+  "nav.tests": "<todo-translate>",
+  "nav.toggleMenu": "<todo-translate>",
+  "select": {
+    "noOptions": "Нет доступных вариантов"
+  },
+  "stripe_customer_id": "<todo-translate>",
+  "subscription": {
+    "updateSuccess": "Подписка успешно обновлена",
+    "updateError": "Ошибка обновления подписки: {{message}}",
+    "aiCounterReset": "Счетчик AI тестов сброшен",
+    "aiCounterResetError": "Ошибка сброса счетчика AI тестов: {{message}}",
+    "aiUsageIncrementError": "Ошибка увеличения использования AI тестов: {{message}}",
+    "features": "Особенности подписки",
+    "aiTests": "AI Тесты (в день)",
+    "unlimited": "Безлимитно",
+    "staticTests": "Статические тесты",
+    "analytics": "Аналитика и история",
+    "advertising": "Реклама",
+    "support": "Поддержка",
+    "apiAccess": "Доступ к API",
+    "customBranding": "Кастомный брендинг",
+    "dataExport": "Экспорт данных",
+    "upgrade": "Улучшить подписку",
+    "upgradeInfo": "Улучшите ваш план для доступа к дополнительным функциям.",
+    "manageSubscription": "Управлять подпиской"
+  },
+  "subscription.advertising": "<todo-translate>",
+  "subscription.aiCounterReset": "<todo-translate>",
+  "subscription.aiTests": "<todo-translate>",
+  "subscription.analytics": "<todo-translate>",
+  "subscription.apiAccess": "<todo-translate>",
+  "subscription.customBranding": "<todo-translate>",
+  "subscription.dataExport": "<todo-translate>",
+  "subscription.features": "<todo-translate>",
+  "subscription.staticTests": "<todo-translate>",
+  "subscription.support": "<todo-translate>",
+  "subscription.unlimited": "<todo-translate>",
+  "subscription.updateSuccess": "<todo-translate>",
+  "subscription.upgrade": "<todo-translate>",
+  "subscription.upgradeInfo": "<todo-translate>",
+  "testCard": {
+    "durationLabel": "Длительность",
+    "difficultyLabel": "Сложность",
+    "accessLabel": "Доступ",
+    "premium": "Премиум",
+    "free": "Бесплатно",
+    "startTestButton": "Начать тест"
+  },
+  "testCard.accessLabel": "<todo-translate>",
+  "testCard.difficultyLabel": "<todo-translate>",
+  "testCard.durationLabel": "<todo-translate>",
+  "testCard.free": "<todo-translate>",
+  "testCard.premium": "<todo-translate>",
+  "testCard.startTestButton": "<todo-translate>",
+  "testHistory": {
+    "empty": "История тестов пуста.",
+    "personalityAvatar": "Аватар личности",
+    "personalityProfile": "Профиль личности",
+    "noScores": "Баллы по этому тесту отсутствуют.",
+    "noAiText": "AI анализ для этого результата еще не сгенерирован или отсутствует.",
+    "recommendations": "Рекомендации на основе этого теста"
+  },
+  "testHistory.empty": "<todo-translate>",
+  "testHistory.noAiText": "<todo-translate>",
+  "testHistory.noScores": "<todo-translate>",
+  "testHistory.personalityAvatar": "<todo-translate>",
+  "testHistory.personalityProfile": "<todo-translate>",
+  "testHistory.recommendations": "<todo-translate>",
+  "testResult": {
+    "noScores": "Результаты (баллы) отсутствуют.",
+    "noAiAnalysis": "AI анализ отсутствует.",
+    "recommendations": "Рекомендации"
+  },
+  "testResult.noAiAnalysis": "<todo-translate>",
+  "testResult.noScores": "<todo-translate>",
+  "testResult.recommendations": "<todo-translate>",
+  "theme": {
+    "changed": "Тема изменена на {{theme}}"
+  },
+  "userProfile": {
+    "title": "Мой профиль",
+    "testHistoryLink": "История моих тестов",
+    "subscriptionStatus": "Статус подписки"
+  }
+}

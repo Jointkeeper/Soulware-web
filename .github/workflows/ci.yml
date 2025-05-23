@@ -1,0 +1,71 @@
+name: Soulware CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop # Or your primary development branch
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build_and_test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x] # Specify Node.js versions
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Environment Variables
+        run: npm run env:check
+        env:
+          # Pass all required secrets/variables from GitHub Actions to the script
+          # These are examples; ensure they match your actual secrets and .env.example
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET_CI }} # It's good practice to use a separate webhook secret for CI if possible
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          STRIPE_PREMIUM_PRICE_ID: ${{ secrets.STRIPE_PREMIUM_PRICE_ID }}
+          STRIPE_PROFESSIONAL_PRICE_ID: ${{ secrets.STRIPE_PROFESSIONAL_PRICE_ID }}
+          NEXT_PUBLIC_STRIPE_PREMIUM_PRICE_ID: ${{ secrets.NEXT_PUBLIC_STRIPE_PREMIUM_PRICE_ID }}
+          NEXT_PUBLIC_STRIPE_PROFESSIONAL_PRICE_ID: ${{ secrets.NEXT_PUBLIC_STRIPE_PROFESSIONAL_PRICE_ID }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }} # Or a test URL for CI
+          # NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID }} # Optional
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Run tests with coverage
+        run: npm run test:ci # This script includes --check-coverage and thresholds
+
+      # Optional: Upload coverage report (e.g., to Codecov or as an artifact)
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }} # if needed
+      #     files: ./coverage/lcov.info # or a different coverage file format
+      #     fail_ci_if_error: true
+
+      - name: Build project
+ 

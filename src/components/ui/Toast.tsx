@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import {
   CheckCircleIcon,
@@ -11,13 +11,15 @@ import { cn } from '@/lib/utils';
 
 export type ToastType = 'success' | 'error' | 'warning' | 'info';
 
-interface ToastProps {
+export interface ToastProps {
   open: boolean;
   setOpen: (open: boolean) => void;
   type?: ToastType;
   title: string;
   message?: string;
   duration?: number;
+  onClose?: () => void;
+  className?: string;
 }
 
 const icons = {
@@ -41,12 +43,28 @@ export function Toast({
   title,
   message,
   duration = 5000,
+  onClose,
+  className,
 }: ToastProps) {
   const Icon = icons[type];
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    if (duration === Infinity) return;
+
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+      if (onClose) {
+        onClose();
+      }
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [duration, onClose]);
 
   return (
     <Transition
-      show={open}
+      show={isVisible}
       as={Fragment}
       enter="transform ease-out duration-300 transition"
       enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
@@ -55,7 +73,7 @@ export function Toast({
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+      <div className={cn("pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5", className)}>
         <div className={cn('p-4', styles[type])}>
           <div className="flex items-start">
             <div className="flex-shrink-0">
